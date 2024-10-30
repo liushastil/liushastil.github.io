@@ -1,0 +1,295 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Java代码审计 | Liusha's Blog</title><meta name="author" content="liushastil"><meta name="copyright" content="liushastil"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="参考链接java代码审计之路 - Afant1 - 博客园 (cnblogs.com) ✍内容Java环境配置java1.8+idea+tomcat IDEA常用快捷键F7步入|F8步过|F9到下一个断点|ALT+F8评估表达式|Ctrl+F 文件内查找字符串|双击Shift 查找任何内容，可搜索类、资源、配置项、方法等，还能搜索路径|Ctrl + N 按类名搜索类|Ctrl + F12 查看当前">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java代码审计">
+<meta property="og:url" content="http://example.com/2023/09/21/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/index.html">
+<meta property="og:site_name" content="Liusha&#39;s Blog">
+<meta property="og:description" content="参考链接java代码审计之路 - Afant1 - 博客园 (cnblogs.com) ✍内容Java环境配置java1.8+idea+tomcat IDEA常用快捷键F7步入|F8步过|F9到下一个断点|ALT+F8评估表达式|Ctrl+F 文件内查找字符串|双击Shift 查找任何内容，可搜索类、资源、配置项、方法等，还能搜索路径|Ctrl + N 按类名搜索类|Ctrl + F12 查看当前">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/1.jpg">
+<meta property="article:published_time" content="2023-09-21T12:13:55.000Z">
+<meta property="article:modified_time" content="2024-10-30T14:08:24.462Z">
+<meta property="article:author" content="liushastil">
+<meta property="article:tag" content="代码审计&#x2F;java&#x2F;笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/1.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2023/09/21/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        if (name && globalFn[key][name]) return
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Java代码审计',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-30 22:08:24'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/head.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(http://www.98qy.com/sjbz/api.php);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/7.jpg" alt="Logo"><span class="site-name">Liusha's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">Java代码审计</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Java代码审计</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-21T12:13:55.000Z" title="发表于 2023-09-21 20:13:55">2023-09-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-30T14:08:24.462Z" title="更新于 2024-10-30 22:08:24">2024-10-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/java%E5%AE%89%E5%85%A8/">java安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/afanti/p/13156152.html">java代码审计之路 - Afant1 - 博客园 (cnblogs.com)</a></p>
+<h2 id="✍内容"><a href="#✍内容" class="headerlink" title="✍内容"></a>✍内容</h2><h1 id="Java环境配置"><a href="#Java环境配置" class="headerlink" title="Java环境配置"></a>Java环境配置</h1><p>java1.8+idea+tomcat</p>
+<h1 id="IDEA常用快捷键"><a href="#IDEA常用快捷键" class="headerlink" title="IDEA常用快捷键"></a>IDEA常用快捷键</h1><p>F7步入|F8步过|F9到下一个断点|ALT+F8评估表达式|Ctrl+F 文件内查找字符串|双击Shift 查找任何内容，可搜索类、资源、配置项、方法等，还能搜索路径|Ctrl + N 按类名搜索类|Ctrl + F12 查看当前类结构|Ctrl + H 查看类的层次关系|Alt + F7 查找类或方法在哪被使用</p>
+<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p>java+idea+tomcat自己找</p>
+<h2 id="项目新建"><a href="#项目新建" class="headerlink" title="项目新建"></a>项目新建</h2><p>新建一个标准项目</p>
+<p>在项目结构中配置JDK，然后在模块中选择新建web<br><img src="/2023/09/21/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20241028120009279.png"></p>
+<p>然后添加artifacts<br><img src="/2023/09/21/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20241028120009303.png"></p>
+<p>然后文件配置按照如下<br><img src="/2023/09/21/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20241028120009334.png"></p>
+<p>然后设置就已经好了，但是java版本需要下最新版本的</p>
+<h1 id="javaweb基础"><a href="#javaweb基础" class="headerlink" title="javaweb基础"></a>javaweb基础</h1><h2 id="servlet"><a href="#servlet" class="headerlink" title="servlet"></a>servlet</h2><p>java服务模块，主要的业务逻辑就是用的这个模块</p>
+<p>idea的servlet一般是继承httpservlet类</p>
+<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><p>过滤器模块</p>
+<p><strong>创建TargetFilter类：</strong></p>
+<ul>
+<li><p>要点1：实现<code>javax.servlet.Filter</code>接口</p>
+</li>
+<li><p>要点2：在<code>doFilter()</code>方法中执行过滤</p>
+</li>
+<li><p>要点3：如果满足过滤条件使用 <code>chain.doFilter(request, response);</code>放行</p>
+</li>
+<li><p>要点4：如果不满足过滤条件转发或重定向请求</p>
+<ul>
+<li>附带问题：Thymeleaf模板渲染。这里我们选择的解决办法是跳转到一个Servlet，由Servlet负责执行模板渲染返回页面。</li>
+</ul>
+</li>
+</ul>
+<h2 id="listener"><a href="#listener" class="headerlink" title="listener"></a>listener</h2><p>监听器</p>
+<p>用于监听Web应用程序中的ServletContext，HttpSession 和HttpServletRequest等域对象的创建与销毁事件，以及监听这些域对象中的属性发生修改的事件。</p>
+<h2 id="Thymeleaf"><a href="#Thymeleaf" class="headerlink" title="Thymeleaf"></a>Thymeleaf</h2><p>Thymeleaf是一种模板引擎，直接在html中的任意标签前面加上<code>th:</code>即可在后端修改其值</p>
+<p>详细的用法可以参考官网、</p>
+<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><h2 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h2><p>在实际应用中Ajax指的是：<strong>不刷新浏览器窗口</strong>，<strong>不做页面跳转</strong>，<strong>局部更新页面内容</strong>的技术。</p>
+<p>使用原生的JavaScript程序执行Ajax极其繁琐，所以一定要使用框架来完成。而Axios就是目前最流行的前端Ajax框架。</p>
+<p>使用Axios和使用Vue一样，导入对应的*.js文件即可。官方提供的script标签引入方式为：</p>
+<p><code>&lt;script src=&quot;https://unpkg.com/axios/dist/axios.min.js&quot;&gt;&lt;/script&gt;</code></p>
+<h2 id="Java远程调试Behinder-jar"><a href="#Java远程调试Behinder-jar" class="headerlink" title="Java远程调试Behinder.jar"></a>Java远程调试Behinder.jar</h2><p>首先在命令行中输入如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=<span class="number">10.194</span><span class="number">.7</span><span class="number">.167</span>:<span class="number">5005</span> Behinder.jar</span><br></pre></td></tr></table></figure>
+
+
+<p>然后去idea中新建一个项目，添加远程调用的配置</p>
+<p>然后将jar包添加到库，打上断点即可调试</p>
+<h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><p><a target="_blank" rel="noopener" href="https://github.com/super9du/vhr-backend/tree/master">https://github.com/super9du/vhr-backend/tree/master</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/JoyChou93/java-sec-code">https://github.com/JoyChou93/java-sec-code</a></p>
+<h1 id="审计思路"><a href="#审计思路" class="headerlink" title="审计思路"></a>审计思路</h1><p><strong>参考链接</strong>：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9173">https://xz.aliyun.com/t/9173</a></p>
+<h2 id="确定系统框架"><a href="#确定系统框架" class="headerlink" title="确定系统框架"></a>确定系统框架</h2><h3 id="Struts1"><a href="#Struts1" class="headerlink" title="Struts1"></a>Struts1</h3><ul>
+<li><p>查看web.xml，里面有一个servlet内容如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;servlet-class&gt;</span><br><span class="line">			org.apache.struts.action.ActionServlet</span><br><span class="line">&lt;/servlet-class&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>它的路由会出现在<code>&lt;init-param&gt;</code>中的<code>&lt;param-value&gt;</code>中的配置文件中</p>
+</li>
+</ul>
+<p><img src="/2023/09/21/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20241028120009371.png"></p>
+<p>例如struts-config.xml中的一个action如下</p>
+<p><img src="/2023/09/21/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20241028120009403.png"></p>
+<blockquote>
+<p>path就是路由，type就是服务代码</p>
+</blockquote>
+<h3 id="Struts2"><a href="#Struts2" class="headerlink" title="Struts2"></a>Struts2</h3><p><strong>参考</strong>：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9173">https://xz.aliyun.com/t/9173</a></p>
+<ul>
+<li>查看web.xml，查看filter，里面会有名为struts的过滤器</li>
+</ul>
+<p><strong>struts.xml文件</strong></p>
+<p>这个文件中有action的具体java文件路径信息</p>
+<h4 id="层次介绍"><a href="#层次介绍" class="headerlink" title="层次介绍"></a>层次介绍</h4><p><strong>action为业务逻辑处理层</strong>，action层接收来自视图层（.jsp（可以理解为前端吧，就是用户看到操作的那层））的请求，并接收请求参数，同时负责调用模型Model层方法来完成业务逻辑的处理，最后控制程序的流程，选择一个合适的视图，将结果显示给用户，一般这个目录下文件的特征表现为xxxxaction.java，比如NovyAction.java；</p>
+<p><strong>dao为数据持久层</strong>，在这层中通常是用来做数据库请求处理的，增删查改都在这里，一般这个目录下文件的特征表现为xxxxDao.java，比如NovyDao.java。</p>
+<p>在web运行处理请求时流程为业务逻辑处理层-数据持久层</p>
+<h3 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h3><ul>
+<li><p>先查看web.xml，里面会有springMVC</p>
+</li>
+<li><p>查看Springmvc.xml<br>查找各种controller类所在的位置</p>
+</li>
+<li><p>查看pom.xml<br>各种依赖的引入</p>
+</li>
+</ul>
+<h4 id="层次结构"><a href="#层次结构" class="headerlink" title="层次结构"></a>层次结构</h4><p><strong>controller为控制层（业务逻辑）</strong>，用来接收客户端的请求，然后调用Service层业务逻辑，获取到数据，传递数据给视图层（客户端）用于视觉呈现，一般请求的url在这里，比如</p>
+<p>@Controller<br>@RequestMapping(value &#x3D; “&#x2F;novy”)</p>
+<p>则请求url为<code>http://localhost/novy</code><br>控制层的文件一般为xxxcontroller.java，比如NovyController.java</p>
+<p><strong>Service是业务层</strong>，接收Controller层数据，与DAO&#x2F;Mapper层交互，处理业务逻辑，生成responseDTO数据并返回Controller层 ,该层文件一般为xxxServce.java，比如NovyService.java，此处是接口定义，就是定义一些方法，没有这些方法的实现，但是有时候数据操作会在这里发生（看开发）</p>
+<p><strong>Implements是服务实现层（接口实现）</strong>，用来处理一些方法的实现（这个方法干了啥干了啥），该层文件一般为xxxImpl.java，比如NovyImpl.java，impl 是把mapper和service进行整合的文件，有时候一些sql操作也会发生在这里</p>
+<p><strong>Mapper是数据持久层</strong>，对数据库进行数据持久化操作，他的方法语句是直接针对数据库操作的，数据持久层文件通常都是xxxMapper.xml，比如NovyMapper.xml</p>
+<p><strong>Dao是数据接口层</strong>，一些数据请求（接口）会在这里发生（一般用于内部实现）</p>
+<p><strong>Entity是实体处理层</strong>，用于存放我们的实体类，与数据库中的属性值基本保持一致（定义前端传来的请求参数）</p>
+<p>在web运行时处理请求的流程为<code>Controller-&gt;Service-&gt;impl-&gt;mapper</code></p>
+<h3 id="Springboot"><a href="#Springboot" class="headerlink" title="Springboot"></a>Springboot</h3><p>和springmvc差不多</p>
+<h3 id="SSH框架"><a href="#SSH框架" class="headerlink" title="SSH框架"></a>SSH框架</h3><p>struts2+spring+hibernate</p>
+<h2 id="寻找sql注入漏洞"><a href="#寻找sql注入漏洞" class="headerlink" title="寻找sql注入漏洞"></a>寻找sql注入漏洞</h2><h3 id="mybatis框架"><a href="#mybatis框架" class="headerlink" title="mybatis框架"></a>mybatis框架</h3><p>mybatis一般是使用<code>#&#123;</code>进行预编译，但是在order by的情况下必须使用<code>$&#123;</code>直接拼接，或者是一些其他情况使用了<code>$&#123;</code>，就可能会出现sql注入的问题</p>
+<blockquote>
+<p>这里使用ruoyi框架为例子</p>
+</blockquote>
+<h4 id="审计方法"><a href="#审计方法" class="headerlink" title="审计方法"></a>审计方法</h4><ul>
+<li>全局搜索<code>$&#123;</code>，文件类型限定为xml<br>![[Pasted image 20241019145616.png]]<br>如上图，直接点进去一个mapper文件查看即可</li>
+</ul>
+<p>这里进入SysRoleMapper.xml文件<br>![[Pasted image 20241019150554.png]]</p>
+<blockquote>
+<p>select标签中的id的值selectRoleList就是用到该mapper的方法<br>parameterType的值SysRole就是需要传入的参数对象</p>
+</blockquote>
+<p>然后就需要往上寻找入口点</p>
+<ul>
+<li>寻找定义selectRoleList方法的java文件</li>
+</ul>
+<p>xml文件一般是在resource&#x2F;mapper文件夹中，对应的mapper在java源代码的mapper文件夹中</p>
+<p>正常来说直接使用ctrl+点击方法名就可以跳转到源文件，若是没有的话可以使用搜索功能找到定义该函数的mapper类型的java文件，如下第一个就是<br>![[Pasted image 20241019151404.png]]</p>
+<ul>
+<li><p>找到impl实现文件<br>直接ctrl+单击即可<br>![[Pasted image 20241019151503.png]]</p>
+</li>
+<li><p>寻找接口文件<br>既然有实现文件，那么肯定也有接口文件，直接点击ctrl+u就可以跳转到</p>
+</li>
+<li><p>寻找入口文件(controller)</p>
+</li>
+</ul>
+<p>使用搜索功能，直接搜索selectRoleList方法，找到cotroller类型的文件<br>![[Pasted image 20241019152031.png]]<br>SysRoleController.java文件内容如下<br>![[Pasted image 20241019152145.png]]</p>
+<ul>
+<li>可以看到根路由是<code>/system/role</code></li>
+</ul>
+<p>对应的get方法的路由是<code>/list</code>，然后里面有参数<code>role</code>，可以看到role的类型是<code>SysRole</code></p>
+<ul>
+<li>搜索参数定义<br>全局搜索<code>SysRole</code>的定义文件</li>
+</ul>
+<p>![[Pasted image 20241019152823.png]]</p>
+<p>SysRole.java文件<br>![[Pasted image 20241019153112.png]]</p>
+<p>可以发现，直接获取值，并且没有做任何的过滤</p>
+<ul>
+<li>快捷方法</li>
+</ul>
+<p>抓到xml文件中的可能的注入点后，直接使用搜索功能，找到使用对应的方法的controller类型的文件，和对应的参数类型的java文件，然后直接进行分析即可</p>
+<ul>
+<li>寻找后端地址</li>
+</ul>
+<p>若是有在线的项目，直接抓包登录看一下就知道了，还可以从源码中的<code>application.yml</code>文件中查看，或者是vue的<code>vue.config.js</code>文件中</p>
+<p>![[Pasted image 20241019154933.png]]</p>
+<p>通过以上的分析，可以得出漏洞存在的路径是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1：8086/system/role/list?roleId=1&amp;roleName-admin&amp;roleKey=1&amp;params[dataScope]=and+updatexml(1,concat(0x7e,(SELECT+version()),0x7e),1)%2523</span><br><span class="line"># 大致上就是这些，剩下的就不加了</span><br></pre></td></tr></table></figure>
+
+<p><code>params[dataScope]</code>这种形式是因为xml文件中定义是<code>$&#123;params.dataScope&#125;</code></p>
+<h3 id="Hibernate框架"><a href="#Hibernate框架" class="headerlink" title="Hibernate框架"></a>Hibernate框架</h3><p>Hibernate框架一般没有sql注入漏洞，一般都是使用占位符的</p>
+<h4 id="审计方法-1"><a href="#审计方法-1" class="headerlink" title="审计方法"></a>审计方法</h4><ul>
+<li>关键词检索<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Query</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>搜索完后，查看是否是使用占位符，若是直接拼接的话就是有漏的的</p>
+<p>若是找到有漏洞的sql查询语句，使用如下方法跟踪到controller层<br>假设寻找findall方法<br><img src="/2023/09/21/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Pasted%20image%2020241025151731.png"></p>
+<p>ctrl+左键单击进入实现类<br><img src="/2023/09/21/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Pasted%20image%2020241025152321.png"></p>
+<p>然后ctrl+左键点击上一层的方法findSide转到controller类</p>
+<p><img src="/2023/09/21/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Pasted%20image%2020241025152408.png"></p>
+<p><img src="/2023/09/21/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Pasted%20image%2020241025153514.png"></p>
+<p>可以发现接口是<code>core/task/view.do</code></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">liushastil</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/09/21/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">http://example.com/2023/09/21/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Liusha's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-java-%E7%AC%94%E8%AE%B0/">代码审计/java/笔记</a></div><div class="post-share"><div class="social-share" data-image="/img/1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2023/10/24/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%85%A5%E9%97%A8/" title="Java反序列化漏洞入门"><img class="cover" src="/img/2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Java反序列化漏洞入门</div></div><div class="info-2"><div class="info-item-1">✍内容参考链接java安全基础反序列化02 URLDNS利用链_哔哩哔哩_bilibili 浅显易懂的JAVA反序列化入门 - 先知社区 (aliyun.com) 深入理解 Java 反序列化漏洞-腾讯云开发者社区-腾讯云 (tencent.com) Java反序列化漏洞分析 - ssooking - 博客园 (cnblogs.com) 【两万字原创长文】完全零基础入门Fastjson系列漏洞（基础篇） (qq.com) IDEA常用快捷键F7步入|F8步过|F9到下一个断点|ALT+F8评估表达式|Ctrl+F 文件内查找字符串|双击Shift 查找任何内容，可搜索类、资源、配置项、方法等，还能搜索路径|Ctrl + N 按类名搜索类|Ctrl + F12 查看当前类结构|Ctrl + H 查看类的层次关系|Alt + F7 查找类或方法在哪被使用 反序列化基础参考:序列化和反序列化 URLDNS链分析这是java的原生利用链，通常用于反序列化的验证，因为是原生态不存在版本限制 HashMap结合URL触发的DNS检查思路 利用链123456789HashMap --&gt;...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/head.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">liushastil</div><div class="author-info-description">珍惜光阴，享受当下!</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/liushastil"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">1.</span> <span class="toc-text">参考链接</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%8D%E5%86%85%E5%AE%B9"><span class="toc-number">1.1.</span> <span class="toc-text">✍内容</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">Java环境配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IDEA%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">3.</span> <span class="toc-text">IDEA常用快捷键</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80"><span class="toc-number">3.1.</span> <span class="toc-text">下载地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E6%96%B0%E5%BB%BA"><span class="toc-number">3.2.</span> <span class="toc-text">项目新建</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#javaweb%E5%9F%BA%E7%A1%80"><span class="toc-number">4.</span> <span class="toc-text">javaweb基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#servlet"><span class="toc-number">4.1.</span> <span class="toc-text">servlet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter"><span class="toc-number">4.2.</span> <span class="toc-text">Filter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#listener"><span class="toc-number">4.3.</span> <span class="toc-text">listener</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thymeleaf"><span class="toc-number">4.4.</span> <span class="toc-text">Thymeleaf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue"><span class="toc-number">4.5.</span> <span class="toc-text">Vue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ajax"><span class="toc-number">4.6.</span> <span class="toc-text">Ajax</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95Behinder-jar"><span class="toc-number">4.7.</span> <span class="toc-text">Java远程调试Behinder.jar</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%BA%90%E7%A0%81"><span class="toc-number">5.</span> <span class="toc-text">源码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%A1%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-number">6.</span> <span class="toc-text">审计思路</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E7%B3%BB%E7%BB%9F%E6%A1%86%E6%9E%B6"><span class="toc-number">6.1.</span> <span class="toc-text">确定系统框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Struts1"><span class="toc-number">6.1.1.</span> <span class="toc-text">Struts1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Struts2"><span class="toc-number">6.1.2.</span> <span class="toc-text">Struts2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E4%BB%8B%E7%BB%8D"><span class="toc-number">6.1.2.1.</span> <span class="toc-text">层次介绍</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SpringMVC"><span class="toc-number">6.1.3.</span> <span class="toc-text">SpringMVC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="toc-number">6.1.3.1.</span> <span class="toc-text">层次结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Springboot"><span class="toc-number">6.1.4.</span> <span class="toc-text">Springboot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH%E6%A1%86%E6%9E%B6"><span class="toc-number">6.1.5.</span> <span class="toc-text">SSH框架</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BB%E6%89%BEsql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E"><span class="toc-number">6.2.</span> <span class="toc-text">寻找sql注入漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mybatis%E6%A1%86%E6%9E%B6"><span class="toc-number">6.2.1.</span> <span class="toc-text">mybatis框架</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%A1%E8%AE%A1%E6%96%B9%E6%B3%95"><span class="toc-number">6.2.1.1.</span> <span class="toc-text">审计方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hibernate%E6%A1%86%E6%9E%B6"><span class="toc-number">6.2.2.</span> <span class="toc-text">Hibernate框架</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%A1%E8%AE%A1%E6%96%B9%E6%B3%95-1"><span class="toc-number">6.2.2.1.</span> <span class="toc-text">审计方法</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/10/30/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E6%9C%BA-Linux(2)-%E5%AE%9E%E6%88%98/" title="应急响应靶机-Linux(2)-实战"><img src="/img/9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="应急响应靶机-Linux(2)-实战"/></a><div class="content"><a class="title" href="/2024/10/30/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E6%9C%BA-Linux(2)-%E5%AE%9E%E6%88%98/" title="应急响应靶机-Linux(2)-实战">应急响应靶机-Linux(2)-实战</a><time datetime="2024-10-30T08:15:27.000Z" title="发表于 2024-10-30 16:15:27">2024-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/28/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E6%9C%BA-Web1%E5%AE%9E%E6%88%98/" title="应急响应靶机-Web1实战"><img src="/img/12.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="应急响应靶机-Web1实战"/></a><div class="content"><a class="title" href="/2024/10/28/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E6%9C%BA-Web1%E5%AE%9E%E6%88%98/" title="应急响应靶机-Web1实战">应急响应靶机-Web1实战</a><time datetime="2024-10-28T12:23:15.000Z" title="发表于 2024-10-28 20:23:15">2024-10-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/28/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E6%9C%BA-Linux(1)-%E5%AE%9E%E6%88%98/" title="应急响应靶机-Linux(1)-实战"><img src="/img/8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="应急响应靶机-Linux(1)-实战"/></a><div class="content"><a class="title" href="/2024/10/28/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E6%9C%BA-Linux(1)-%E5%AE%9E%E6%88%98/" title="应急响应靶机-Linux(1)-实战">应急响应靶机-Linux(1)-实战</a><time datetime="2024-10-28T09:55:21.000Z" title="发表于 2024-10-28 17:55:21">2024-10-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/27/Linux%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/" title="Linux搭建Hexo博客"><img src="/img/2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux搭建Hexo博客"/></a><div class="content"><a class="title" href="/2024/10/27/Linux%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/" title="Linux搭建Hexo博客">Linux搭建Hexo博客</a><time datetime="2024-10-27T11:01:34.000Z" title="发表于 2024-10-27 19:01:34">2024-10-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/24/jspxcms%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" title="jspxcms代码审计"><img src="/img/3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="jspxcms代码审计"/></a><div class="content"><a class="title" href="/2024/10/24/jspxcms%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" title="jspxcms代码审计">jspxcms代码审计</a><time datetime="2024-10-24T06:12:46.000Z" title="发表于 2024-10-24 14:12:46">2024-10-24</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By liushastil</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
