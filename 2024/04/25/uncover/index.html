@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>uncover | Liusha's Blog</title><meta name="author" content="liushastil"><meta name="copyright" content="liushastil"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="✍内容项目地址https:&#x2F;&#x2F;github.com&#x2F;projectdiscovery&#x2F;uncover 简介 uncover is a go wrapper using APIs of well known search engines to quickly discover exposed hosts on the internet. It is built with automation in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="uncover">
+<meta property="og:url" content="http://example.com/2024/04/25/uncover/index.html">
+<meta property="og:site_name" content="Liusha&#39;s Blog">
+<meta property="og:description" content="✍内容项目地址https:&#x2F;&#x2F;github.com&#x2F;projectdiscovery&#x2F;uncover 简介 uncover is a go wrapper using APIs of well known search engines to quickly discover exposed hosts on the internet. It is built with automation in">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/1.jpg">
+<meta property="article:published_time" content="2024-04-25T12:11:34.000Z">
+<meta property="article:modified_time" content="2024-10-31T14:32:25.159Z">
+<meta property="article:author" content="liushastil">
+<meta property="article:tag" content="工具使用&#x2F;projectdiscovery">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/1.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2024/04/25/uncover/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        if (name && globalFn[key][name]) return
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'uncover',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-31 22:32:25'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/head.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(http://www.98qy.com/sjbz/api.php);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/7.jpg" alt="Logo"><span class="site-name">Liusha's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">uncover</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">uncover</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-25T12:11:34.000Z" title="发表于 2024-04-25 20:11:34">2024-04-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-31T14:32:25.159Z" title="更新于 2024-10-31 22:32:25">2024-10-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="✍内容"><a href="#✍内容" class="headerlink" title="✍内容"></a>✍内容</h2><h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><p><a target="_blank" rel="noopener" href="https://github.com/projectdiscovery/uncover">https://github.com/projectdiscovery/uncover</a></p>
+<p><strong>简介</strong></p>
+<p><strong>uncover</strong> is a go wrapper using APIs of well known search engines to quickly discover exposed hosts on the internet. It is built with automation in mind, so you can query it and utilize the results with your current pipeline tools.</p>
+<h2 id="Installation-Instructions"><a href="#Installation-Instructions" class="headerlink" title="Installation Instructions"></a>Installation Instructions</h2><p>uncover requires <strong>go1.20</strong> to install successfully. Run the following command to get the repo -</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go install -v github.com/projectdiscovery/uncover/cmd/uncover@latest</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>默认输出地址<br><code>/root/go/bin/</code><br>运行上面的下载命令就会将工具下载到这个目录中</p>
+</li>
+<li><p>provider configuration file address<br><code>/root/.config/uncover/</code></p>
+</li>
+</ul>
+<h2 id="Provider-Configuration"><a href="#Provider-Configuration" class="headerlink" title="Provider Configuration"></a>Provider Configuration</h2><p>The default provider configuration file should be located at <code>$CONFIG/uncover/provider-config.yaml</code> and has the following contents as an example.</p>
+<blockquote>
+<p><strong>Note</strong>: API keys are required and must be configured before running uncover.</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">shodan:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">SHODAN_API_KEY_1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">SHODAN_API_KEY_2</span></span><br><span class="line"><span class="attr">censys:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">CENSYS_API_ID_1:CENSYS_API_SECRET_1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">CENSYS_API_ID_2:CENSYS_API_SECRET_2</span></span><br><span class="line"><span class="attr">fofa:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">FOFA_EMAIL_1:FOFA_KEY_1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">FOFA_EMAIL_2:FOFA_KEY_2</span></span><br><span class="line"><span class="attr">quake:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">QUAKE_TOKEN_1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">QUAKE_TOKEN_2</span></span><br><span class="line"><span class="attr">hunter:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">HUNTER_API_KEY_1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">HUNTER_API_KEY_2</span></span><br><span class="line"><span class="attr">zoomeye:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">ZOOMEYE_API_KEY_1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">ZOOMEYE_API_KEY_2</span></span><br><span class="line"><span class="attr">netlas:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">NETLAS_API_KEY_1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">NETLAS_API_KEY_2</span></span><br><span class="line"><span class="attr">criminalip:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">CRIMINALIP_API_KEY_1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">CRIMINALIP_API_KEY_2</span></span><br><span class="line"><span class="attr">publicwww:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">PUBLICWWW_API_KEY_1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">PUBLICWWW_API_KEY_2</span></span><br><span class="line"><span class="attr">hunterhow:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">HUNTERHOW_API_KEY_1</span> </span><br><span class="line">  <span class="bullet">-</span> <span class="string">HUNTERHOW_API_KEY_2</span></span><br></pre></td></tr></table></figure>
+
+<p>When multiple keys&#x2F;credentials are specified for same provider in the config file, random key will be used for each execution.</p>
+<p>其他的参考官网即可</p>
+<h1 id="命令示例"><a href="#命令示例" class="headerlink" title="命令示例"></a>命令示例</h1><blockquote>
+<p>这个工具如果没有指定引擎的话默认是使用shodan引擎</p>
+</blockquote>
+<h2 id="默认运行"><a href="#默认运行" class="headerlink" title="默认运行"></a>默认运行</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;ssl:&quot;Uber Technologies, Inc.&quot;&#x27; | uncover</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="查询文件中的语句"><a href="#查询文件中的语句" class="headerlink" title="查询文件中的语句"></a>查询文件中的语句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uncover -q dorks.txt</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat dorks.txt</span><br><span class="line"></span><br><span class="line">ssl:&quot;Uber Technologies, Inc.&quot;</span><br><span class="line">title:&quot;Grafana&quot;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="利用多个引擎查询"><a href="#利用多个引擎查询" class="headerlink" title="利用多个引擎查询"></a>利用多个引擎查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo jira | uncover -e shodan,censys,fofa,quake,hunter,zoomeye,netlas,criminalip</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="多个引擎使用不同的语句搜索"><a href="#多个引擎使用不同的语句搜索" class="headerlink" title="多个引擎使用不同的语句搜索"></a>多个引擎使用不同的语句搜索</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uncover -shodan &#x27;http.component:&quot;Atlassian Jira&quot;&#x27; -censys &#x27;services.software.product=`Jira`&#x27; -fofa &#x27;app=&quot;ATLASSIAN-JIRA&quot;&#x27; -quake &#x27;Jira&#x27; -hunter &#x27;Jira&#x27; -zoomeye &#x27;app:&quot;Atlassian JIRA&quot;&#x27; -netlas &#x27;jira&#x27; -criminalip &#x27;Jira&#x27;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="shodan快速识别IP端口以及漏洞查询"><a href="#shodan快速识别IP端口以及漏洞查询" class="headerlink" title="shodan快速识别IP端口以及漏洞查询"></a>shodan快速识别IP端口以及漏洞查询</h2><p>echo 51.83.59.99&#x2F;24 | uncover</p>
+<h2 id="指定输出内容"><a href="#指定输出内容" class="headerlink" title="指定输出内容"></a>指定输出内容</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">uncover -q jira -f host -silent</span><br><span class="line"></span><br><span class="line">ec2-44-198-22-253.compute-1.amazonaws.com</span><br><span class="line">ec2-18-246-31-139.us-west-2.compute.amazonaws.com</span><br><span class="line">tasks.devrtb.com</span><br><span class="line">leased-line-91-149-128-229.telecom.by</span><br><span class="line">74.242.203.213.static.inetbone.net</span><br><span class="line">ec2-52-211-7-108.eu-west-1.compute.amazonaws.com</span><br><span class="line">ec2-54-187-161-180.us-west-2.compute.amazonaws.com</span><br><span class="line">185-2-52-226.static.nucleus.be</span><br><span class="line">ec2-34-241-80-255.eu-west-1.compute.amazonaws.com</span><br><span class="line"></span><br><span class="line">-f 有三种模式：ip、port、host，对应的就是只输出ip、port或者host</span><br><span class="line">-silent表示只输出不调试</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="自定义输出格式"><a href="#自定义输出格式" class="headerlink" title="自定义输出格式"></a>自定义输出格式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">echo kubernetes | uncover -f https://ip:port/version -silent</span><br><span class="line"></span><br><span class="line">https://35.222.229.38:443/version</span><br><span class="line">https://52.11.181.228:443/version</span><br><span class="line">https://35.239.255.1:443/version</span><br><span class="line">https://34.71.48.11:443/version</span><br><span class="line">https://130.211.54.173:443/version</span><br><span class="line">https://54.184.250.232:443/version</span><br></pre></td></tr></table></figure>
+
+<h2 id="将uncover的结果作为其他工具的输入"><a href="#将uncover的结果作为其他工具的输入" class="headerlink" title="将uncover的结果作为其他工具的输入"></a>将uncover的结果作为其他工具的输入</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">uncover -q example -f ip | naabu  在找到的主机上运行 naabu 进行端口扫描</span><br><span class="line">uncover -q title:GitLab | httpx  为 Web 服务器运行 httpx 以探测找到的结果。</span><br><span class="line">uncover -q 51.83.59.99/24 | httpx  在从 shodan-internetdb 获取的主机/端口上运行 httpx。</span><br><span class="line">uncover -q &#x27;org:&quot;Example Inc.&quot;&#x27; | httpx | nuclei   运行 httpx / nuclei 进行漏洞评估。</span><br></pre></td></tr></table></figure>
+
+<h1 id="notes"><a href="#notes" class="headerlink" title="notes"></a>notes</h1><p>结果被限制为 <code>100</code> 默认值，可以使用 <code>limit</code> 标志来增加。</p>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="快速探测端口以及存活探测"><a href="#快速探测端口以及存活探测" class="headerlink" title="快速探测端口以及存活探测"></a>快速探测端口以及存活探测</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./uncover -q net:192.168.2.1/24 | ./httpx -sc -title</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="shodan-key"><a href="#shodan-key" class="headerlink" title="shodan key"></a>shodan key</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">shodan:</span><br><span class="line">	- </span><br><span class="line"></span><br><span class="line">ZOOMEYE_API_KEY=</span><br></pre></td></tr></table></figure>
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">liushastil</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/04/25/uncover/">http://example.com/2024/04/25/uncover/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Liusha's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-projectdiscovery/">工具使用/projectdiscovery</a></div><div class="post-share"><div class="social-share" data-image="/img/1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/04/25/httpx/" title="httpx"><img class="cover" src="/img/5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">httpx</div></div><div class="info-2"><div class="info-item-1">✍内容工具地址https://github.com/projectdiscovery/httpx 下载go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest 命令参数123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153Flags:INPUT:   -l, -list...</div></div></div></a><a class="pagination-related" href="/2024/03/23/ffuf%E7%9A%84%E4%BD%BF%E7%94%A8/" title="ffuf的使用"><img class="cover" src="/img/15.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">ffuf的使用</div></div><div class="info-2"><div class="info-item-1">✍内容下载地址https://github.com/ffuf/ffuf/ 直接去release中下载编译好的amd64的 使用教程使用关键字来确定fuzz的位置，默认关键字是FUZZ，可以自己定义，只需要在字典的后面加上冒号+名称即可 帮助ffuf -h 代理-x socks5:&#x2F;&#x2F;127.0.0.1:10810 指定文件头 指定User-Agent-H “User-Agent: Mozilla&#x2F;5.0 Windows NT 10.0 Win64 AppleWebKit&#x2F;537.36 Chrome&#x2F;69.0.3497.100”  递归fuzz 指定递归2层-recursion 2  匹配正则-mr “sucess” 匹配状态码 匹配需要的-mc 200，403 匹配所有-mc all  匹配响应大小-ms 1291 过滤响应文件大小 指定大小为42的过滤掉-fs 42  正则过滤-fr “error” 指定后缀-e jsp,zip 输出 若是没有输出就不创造文件-or 输出指定格式-of md 输出到文件-o...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/04/25/httpx/" title="httpx"><img class="cover" src="/img/5.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-25</div><div class="info-item-2">httpx</div></div><div class="info-2"><div class="info-item-1">✍内容工具地址https://github.com/projectdiscovery/httpx 下载go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest 命令参数123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153Flags:INPUT:   -l, -list...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/head.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">liushastil</div><div class="author-info-description">珍惜光阴，享受当下!</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/liushastil"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%8D%E5%86%85%E5%AE%B9"><span class="toc-number">1.</span> <span class="toc-text">✍内容</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80"><span class="toc-number"></span> <span class="toc-text">项目地址</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Installation-Instructions"><span class="toc-number">1.</span> <span class="toc-text">Installation Instructions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Provider-Configuration"><span class="toc-number">2.</span> <span class="toc-text">Provider Configuration</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B"><span class="toc-number"></span> <span class="toc-text">命令示例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E8%BF%90%E8%A1%8C"><span class="toc-number">1.</span> <span class="toc-text">默认运行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.</span> <span class="toc-text">查询文件中的语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%A4%9A%E4%B8%AA%E5%BC%95%E6%93%8E%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.</span> <span class="toc-text">利用多个引擎查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E5%BC%95%E6%93%8E%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AF%AD%E5%8F%A5%E6%90%9C%E7%B4%A2"><span class="toc-number">4.</span> <span class="toc-text">多个引擎使用不同的语句搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shodan%E5%BF%AB%E9%80%9F%E8%AF%86%E5%88%ABIP%E7%AB%AF%E5%8F%A3%E4%BB%A5%E5%8F%8A%E6%BC%8F%E6%B4%9E%E6%9F%A5%E8%AF%A2"><span class="toc-number">5.</span> <span class="toc-text">shodan快速识别IP端口以及漏洞查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E8%BE%93%E5%87%BA%E5%86%85%E5%AE%B9"><span class="toc-number">6.</span> <span class="toc-text">指定输出内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">7.</span> <span class="toc-text">自定义输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86uncover%E7%9A%84%E7%BB%93%E6%9E%9C%E4%BD%9C%E4%B8%BA%E5%85%B6%E4%BB%96%E5%B7%A5%E5%85%B7%E7%9A%84%E8%BE%93%E5%85%A5"><span class="toc-number">8.</span> <span class="toc-text">将uncover的结果作为其他工具的输入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#notes"><span class="toc-number"></span> <span class="toc-text">notes</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number"></span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%A2%E6%B5%8B%E7%AB%AF%E5%8F%A3%E4%BB%A5%E5%8F%8A%E5%AD%98%E6%B4%BB%E6%8E%A2%E6%B5%8B"><span class="toc-number">1.</span> <span class="toc-text">快速探测端口以及存活探测</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number"></span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#shodan-key"><span class="toc-number">1.</span> <span class="toc-text">shodan key</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/10/31/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E6%9C%BA-Web2/" title="应急响应靶机-Web2"><img src="/img/13.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="应急响应靶机-Web2"/></a><div class="content"><a class="title" href="/2024/10/31/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E6%9C%BA-Web2/" title="应急响应靶机-Web2">应急响应靶机-Web2</a><time datetime="2024-10-31T01:20:21.000Z" title="发表于 2024-10-31 09:20:21">2024-10-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/30/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E6%9C%BA-Linux(2)-%E5%AE%9E%E6%88%98/" title="应急响应靶机-Linux(2)-实战"><img src="/img/9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="应急响应靶机-Linux(2)-实战"/></a><div class="content"><a class="title" href="/2024/10/30/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E6%9C%BA-Linux(2)-%E5%AE%9E%E6%88%98/" title="应急响应靶机-Linux(2)-实战">应急响应靶机-Linux(2)-实战</a><time datetime="2024-10-30T08:15:27.000Z" title="发表于 2024-10-30 16:15:27">2024-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/28/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E6%9C%BA-Web1%E5%AE%9E%E6%88%98/" title="应急响应靶机-Web1实战"><img src="/img/12.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="应急响应靶机-Web1实战"/></a><div class="content"><a class="title" href="/2024/10/28/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E6%9C%BA-Web1%E5%AE%9E%E6%88%98/" title="应急响应靶机-Web1实战">应急响应靶机-Web1实战</a><time datetime="2024-10-28T12:23:15.000Z" title="发表于 2024-10-28 20:23:15">2024-10-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/28/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E6%9C%BA-Linux(1)-%E5%AE%9E%E6%88%98/" title="应急响应靶机-Linux(1)-实战"><img src="/img/8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="应急响应靶机-Linux(1)-实战"/></a><div class="content"><a class="title" href="/2024/10/28/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E6%9C%BA-Linux(1)-%E5%AE%9E%E6%88%98/" title="应急响应靶机-Linux(1)-实战">应急响应靶机-Linux(1)-实战</a><time datetime="2024-10-28T09:55:21.000Z" title="发表于 2024-10-28 17:55:21">2024-10-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/27/Linux%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/" title="Linux搭建Hexo博客"><img src="/img/2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux搭建Hexo博客"/></a><div class="content"><a class="title" href="/2024/10/27/Linux%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/" title="Linux搭建Hexo博客">Linux搭建Hexo博客</a><time datetime="2024-10-27T11:01:34.000Z" title="发表于 2024-10-27 19:01:34">2024-10-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By liushastil</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
